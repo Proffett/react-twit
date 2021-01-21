@@ -1031,7 +1031,10 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "repository": {
     "type": "git",
@@ -1042,5 +1045,11 @@
   "bugs": {
     "url": "https://github.com/Proffett/react-twit/issues"
   },
-  "homepage": "https://github.com/Proffett/react-twit#readme"
+  "homepage": "https://github.com/Proffett/react-twit#readme",
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
