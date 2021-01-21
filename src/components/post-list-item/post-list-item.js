@@ -7,11 +7,9 @@ export default class PostListItem extends Component {
     this.state = {
       important: false,
       like: false,
-      remove: false
     };
     this.onImportant = this.onImportant.bind(this);
     this.onLike = this.onLike.bind(this);
-    this.onRemove = this.onRemove.bind(this);
   }
 
   onImportant() {
@@ -24,14 +22,10 @@ export default class PostListItem extends Component {
       like: !like
     }))
   }
-  onRemove() {
-    this.setState(({ remove }) => ({
-      remove: !remove
-    }));
-  }
+
   render() {
-    const {important, like, remove} = this.state;
-    const {label} = this.props;
+    const {important, like} = this.state;
+    const {label, onDelete} = this.props;
 
     let classNames = "app-list-item d-flex justify-content-between";
 
@@ -43,10 +37,6 @@ export default class PostListItem extends Component {
       classNames += " like";
     }
 
-    if (remove) {
-      classNames += " remove";
-
-    }
     return (
       <div className={classNames}>
         <span className="app-list-item-label" onClick={this.onLike}>
@@ -64,7 +54,7 @@ export default class PostListItem extends Component {
           <button
             type="button"
             className="btn-trash btn-sm"
-            onClick={this.onRemove}
+            onClick={onDelete}
           >
             <i className="fa fa-trash" />
           </button>
