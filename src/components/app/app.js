@@ -36,6 +36,7 @@ export default class App extends Component {
       this.onUpdateSearch = this.onUpdateSearch.bind(this);
       this.onFilterSelect = this.onFilterSelect.bind(this);
       this.maxId = 4;
+      
 
     }
 
@@ -64,38 +65,30 @@ export default class App extends Component {
       })
     }
 
+
+    setToggle(id, typeToggle) {
+        this.setState(({ data }) => {
+          let newItem = null;
+          const index = data.findIndex((elem) => elem.id === id);
+          const old = data[index];
+          if(typeToggle === 'important') {
+            newItem = { ...old, important: !old.important};
+          } else {newItem = { ...old, like: !old.like}}
+          const newArr = [
+            ...data.slice(0, index),
+            newItem,
+            ...data.slice(index + 1),
+          ];
+          return {data: newArr};
+          });
+    }
+
     onToggleImportant(id) {
-      this.setState(({ data }) => {
-        const index = data.findIndex((elem) => elem.id === id);
-
-        const old = data[index];
-        const newItem = { ...old, important: !old.important };
-
-        const newArr = [
-          ...data.slice(0, index),
-          newItem,
-          ...data.slice(index + 1),
-        ];
-
-        return {
-          data: newArr
-        };
-      });
+      return this.setToggle(id, 'important');
     }
 
     onToggleLiked(id) {
-      this.setState( ({data}) => {
-          const index = data.findIndex( elem => elem.id === id );
-
-          const old = data[index];
-          const newItem = {...old, like: !old.like};
-
-          const newArr = [...data.slice(0, index), newItem, ...data.slice(index + 1)];
-
-          return {
-            data: newArr
-          }
-      })
+      return this.setToggle(id, 'like');
     }
 
     searchPost(items, term) {
